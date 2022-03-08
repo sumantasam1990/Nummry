@@ -191,3 +191,14 @@ Route::post('/reset-password', function (Request $request) {
         ? redirect()->route('login')->with('status', __($status))
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
+
+
+// Static pages
+
+Route::get('/', [\App\Http\Controllers\StaticController::class, 'home'])->name('static.home');
+
+Route::get('/data-points', [\App\Http\Controllers\StaticController::class, 'data_points'])->name('static.data.points');
+
+Route::get('/privacy', [\App\Http\Controllers\StaticController::class, 'privacy'])->name('privacy');
+
+Route::get('/terms', [\App\Http\Controllers\StaticController::class, 'terms'])->name('terms');
