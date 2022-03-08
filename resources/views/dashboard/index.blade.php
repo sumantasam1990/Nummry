@@ -15,9 +15,11 @@
 {{--            <div class="col-md-3">--}}
 {{--                <p class="mt-2">Lesson Planner: Lara</p>--}}
 {{--            </div>--}}
+            @if(auth()->user()->user_type != 'teacher')
             <div class="col-md-3">
-                <a class="btn btn-dark" href="#">Message Rooms</a>
+                <a class="btn btn-dark" href="{{ route('teacher.invitation') }}">Invite Teacher</a>
             </div>
+            @endif
             <div class="col-md-3">
                 <a class="btn btn-link text-danger" href="{{ route('signout') }}">Sign out</a>
             </div>

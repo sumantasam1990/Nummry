@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InviteTutor;
 use App\Models\TeacherStudent;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -138,9 +140,30 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
-    public function teacher($email, $stud_email)
+    public function teacher($email, $stud_email, $unq=null)
     {
-        return view('auth.register', ['title' => 'Signup Teacher', 'email' => $email, 'stud_email' => $stud_email]);
+        if($unq != null) {
+            $teacherExist = User::whereEmail($email)->select('id')->get();
+
+            if(count($teacherExist) > 0) {
+
+                $studentID = User::whereEmail($stud_email)->select('id')->first();
+
+                $teacherStudent = new TeacherStudent;
+                $teacherStudent->student_id = $studentID->id;
+                $teacherStudent->teacher_id = $teacherExist[0]->id;
+                $teacherStudent->save();
+
+                return redirect(route('teacher.dashboard'))->with('msg', 'You have accepted the invitation.');
+
+            } else {
+                return view('auth.register', ['title' => 'Signup Teacher', 'email' => $email, 'stud_email' => $stud_email]);
+            }
+        } else {
+            return abort('404');
+        }
+
+
     }
 
     public function teacher_dashboard()
@@ -152,6 +175,29 @@ class LoginController extends Controller
             ->get();
 
         return view('dashboard.teacher-dashboard', ['title' => 'Teacher Dashboard', 'students' => $students]);
+    }
+
+    public function invitation()
+    {
+        return view('auth.invitation', ['title' => 'Invitation']);
+    }
+
+    public function invitation_post(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
+
+        $mailArray = [
+            'name' => $request->name,
+            'url' => route('register.teacher', [$request->email, Auth::user()->email, md5(uniqid() . time() . date('Y-H:i A'))]),
+            's_name' => Auth::user()->name
+        ];
+
+        Mail::to($request->email)->send(new InviteTutor($mailArray));
+
+        return back()->with('msg', 'Invitation has been sent successfully.');
     }
 
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InviteTutor;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class StaticController extends Controller
 {
@@ -25,4 +27,5 @@ class StaticController extends Controller
     {
         return view('static.terms', ['title' => 'Terms - Nummry']);
     }
+
 }

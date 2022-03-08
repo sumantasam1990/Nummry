@@ -21,7 +21,7 @@ Route::get('login', [LoginController::class, 'login'])->name('login');
 Route::post('custom-login', [LoginController::class, 'authenticate'])->name('login.custom');
 Route::get('signup/{token?}', [LoginController::class, 'registration'])->name('register-user');
 Route::post('custom-registration', [LoginController::class, 'customRegistration'])->name('register.custom');
-Route::get('teacher/{email}/{stud_email}', [LoginController::class, 'teacher'])->name('register.teacher');
+Route::get('teacher/{email}/{stud_email}/{unq}', [LoginController::class, 'teacher'])->name('register.teacher');
 
 
 Route::middleware(['auth'])->prefix('u')->group(function () {
@@ -122,7 +122,9 @@ Route::middleware(['auth'])->prefix('administrator')->group(function () {
 
 // teacher
 
-Route::get('t/dashboard', [LoginController::class, 'teacher_dashboard'])->name('teacher.dashboard');
+Route::get('t/dashboard', [LoginController::class, 'teacher_dashboard'])->name('teacher.dashboard')->middleware('auth');
+Route::get('t/invitation', [LoginController::class, 'invitation'])->name('teacher.invitation')->middleware('auth');
+Route::post('t/invitation/post', [LoginController::class, 'invitation_post'])->name('teacher.invitation.post')->middleware('auth');
 
 
 // email verification routes
