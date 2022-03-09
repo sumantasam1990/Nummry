@@ -22,7 +22,7 @@
                         <input style="display: none;" class="form-control" type="text" name="student_email" value="{{ isset($stud_email) ? $stud_email : '' }}">
 
                         <div class="form-group mb-3">
-                            <label class="mb-2">Your Name</label>
+                            <label class="mb-2">Your Name*</label>
                             <input type="text" placeholder="Name" id="name" class="form-control @error('name') is-invalid @enderror" name="name" required autofocus value="{{ old('name') }}">
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
@@ -30,7 +30,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label class="mb-2">Your Email</label>
+                            <label class="mb-2">Your Email*</label>
                             <input type="email" placeholder="Email" id="email_address" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? $email ?? '' }}" required autofocus autocomplete="off">
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -38,7 +38,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label class="mb-2">Your Password</label>
+                            <label class="mb-2">Your Password*</label>
                             <input type="password" placeholder="Password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" {{ old('password') }} required autocomplete="offf">
                             @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
@@ -46,12 +46,36 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label class="mb-2">Confirm Password</label>
+                            <label class="mb-2">Confirm Password*</label>
                             <input type="password" placeholder="Confirm Password" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="offf">
                             @if ($errors->has('password_confirmation'))
                                 <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
                             @endif
                         </div>
+
+                        <hr class="mt-6">
+
+
+                        <div class="form-group mb-3 ">
+                            <label class="mb-2">Promo Code (Optional)</label>
+                            <input type="text" placeholder="Optional" id="promo" class="form-control @error('promo') is-invalid @enderror" name="promo" autofocus value="{{ old('promo') }}">
+                            @if ($errors->has('promo'))
+                                <span class="text-danger">{{ $errors->first('promo') }}</span>
+                            @endif
+                        </div>
+
+
+
+
+                        <div class="form-group mb-3">
+                            <label class="mb-2">Referral Code (Optional)</label>
+                            <input type="text" placeholder="Optional" id="referral" class="form-control @error('referral') is-invalid @enderror" name="referral" required autofocus value="{{ old('referral') }}">
+                            @if ($errors->has('referral'))
+                                <span class="text-danger">{{ $errors->first('referral') }}</span>
+                            @endif
+                        </div>
+
+
 
                         <div class="form-check mb-3">
                             <input required class="form-check-input" type="checkbox" value="" id="flexCheckDefault">

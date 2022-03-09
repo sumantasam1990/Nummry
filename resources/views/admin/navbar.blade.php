@@ -36,9 +36,9 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('admin.dash') }}">Dashboard</a>
                     </li>
-{{--                    <li class="nav-item">--}}
-{{--                        <a class="nav-link" href="#">View Lessons</a>--}}
-{{--                    </li>--}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.users') }}">Users List</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="offcanvasNavbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Lessons
@@ -80,6 +80,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.view.comparison') }}">View Comparison</a>
                     </li>
+
+
 
 
 

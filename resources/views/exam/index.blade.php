@@ -7,7 +7,7 @@
                 @php
                     $exp = explode(' ', auth()->user()->name);
                 @endphp
-                <h2 class="fs-3 fw-bold"><span class="text-primary">Dashboard > Lessons </span> > {{ date('F j, Y', strtotime($lesson->datetime)) }}</h2>
+                <h2 class="fs-3 fw-bold"><a href="{{ route('dashboard') }}" class="text-primary">Dashboard </a> > Lessons  > {{ date('F j, Y', strtotime($lesson->datetime)) }}</h2>
             </div>
         </div>
     </div>

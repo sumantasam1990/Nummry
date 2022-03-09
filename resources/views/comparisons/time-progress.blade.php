@@ -7,7 +7,7 @@
                 @php
                     $exp = explode(' ', auth()->user()->name);
                 @endphp
-                <h2 class="fs-3">Dashboard > {{ $exp[0] }} to {{ $exp[0] }} > Time Progress > {{ $comparison->name }}</h2>
+                <h2 class="fs-3"><a class="fw-bold" href="{{ route('dashboard') }}"> Dashboard</a> > {{ $exp[0] }} to {{ $exp[0] }} > Time Progress > {{ $comparison->name }}</h2>
             </div>
 
         </div>

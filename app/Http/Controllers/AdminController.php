@@ -22,7 +22,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $users = User::where('id', '!=', Auth::user()->id)->get();
+        $users = User::where('id', '!=', Auth::user()->id)->whereNotIn('user_type', ['teacher'])->get();
         return view('admin.dashboard', ['title' => 'Dashboard - Administrator', 'users' => $users]);
     }
 
@@ -81,6 +81,10 @@ class AdminController extends Controller
             ->join('answers', 'questions.id', '=', 'answers.question_id')
             ->where('results.lesson_id', '=', $id)
             ->get();
+
+        if(count($results) === 0) {
+            return back()->with('msg', 'No result found. Please check back later.');
+        }
 
         $lesson = Lesson::whereId($id)->select('datetime', 'user_id', 'id')->first();
         $user = User::whereId($lesson->user_id)->select('name')->first();
@@ -352,5 +356,12 @@ class AdminController extends Controller
         $metrics = StatProgress::whereStatProgressTitleId($title_id)->paginate(10);
 
         return view('admin.view-progress-metrics', ['title' => 'View Progress Metrics', 'metrics' => $metrics]);
+    }
+
+    public function users_list()
+    {
+        $users = User::where('user_type', '!=', 'Administrator')->paginate(50);
+
+        return view('admin.users', ['title' => 'Users List', 'users' => $users]);
     }
 }

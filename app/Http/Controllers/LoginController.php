@@ -63,7 +63,7 @@ class LoginController extends Controller
     public function registration(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse|\Illuminate\Contracts\Foundation\Application
     {
         if(Auth::check()){
-            return redirect('/dashboard');
+            return redirect(route('dashboard'));
         }
 
         return view('auth.register', ["title" => "Create an account"]);
@@ -109,12 +109,14 @@ class LoginController extends Controller
 
         event(new Registered($user));
 
-        return redirect("login")->with('msg', '<p>Please confirm your email to complete the sign up process. </p> <p>We have emailed you a verification</p> <p>Thank you</p> <p>Team Nummry</p>');
+        return redirect("login")->with('msg', '<p>Please confirm your email to complete the sign up process. </p> <p>We have emailed you a verification. Please check your "SPAM" folder also.</p> <p>Thank you</p> <p>Team Nummry</p>');
     }
 
     public function create(array $data)
     {
         return User::create([
+            'promo' => $data['promo'],
+            'referral' => $data['referral'],
             'user_type' => $data['teacher_txt'],
             'name' => $data['name'],
             'email' => $data['email'],
@@ -160,7 +162,7 @@ class LoginController extends Controller
                 return view('auth.register', ['title' => 'Signup Teacher', 'email' => $email, 'stud_email' => $stud_email]);
             }
         } else {
-            return abort('404');
+            return abort('403');
         }
 
 

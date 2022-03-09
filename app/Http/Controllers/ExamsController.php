@@ -137,7 +137,8 @@ class ExamsController extends Controller
         $datetime1 = new DateTime();
         $datetime2 = new DateTime($testtimee->start_time);
         $interval = $datetime1->diff($datetime2);
-        $elapsed = $interval->format('%y years %m months %d days %h hours %i minutes %s seconds');
+        //$elapsed = $interval->format('%y years %m months %d days %h hours %i minutes %s seconds');
+        $elapsed = $interval->format('%h hours %i minutes %s seconds');
         return response()->json(array('time' => $elapsed));
     }
 

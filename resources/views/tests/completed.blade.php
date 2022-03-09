@@ -6,7 +6,7 @@
                 @php
                     $exp = explode(' ', auth()->user()->name);
                 @endphp
-                <h2 class="fs-3 fw-bold"><span class="text-primary">Dashboard</span> > Tests</h2>
+                <h2 class="fs-3 fw-bold"><a href="{{ route('dashboard') }}" class="text-primary">Dashboard</a> > Tests</h2>
             </div>
 
 

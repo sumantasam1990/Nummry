@@ -23,12 +23,12 @@
 <nav id="bg-light" class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container text-center nav-border">
         <a class="navbar-brand" href="/">
-{{--            <img src="{{ asset('images/logo.webp') }}" >--}}
-            NUMMRY
+            <img src="{{ asset('images/logo.png') }}" style="width: 120px;">
+
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             {{--                <span class="navbar-toggler-icon"></span>--}}
-            <i class="bi bi-list"></i>
+{{--            <i class="bi bi-list"></i>--}}
         </button>
 {{--        <div class="collapse navbar-collapse" id="navbarSupportedContent">--}}
 {{--            <ul class="navbar-nav mx-auto">--}}
@@ -102,7 +102,39 @@
     </div>
 </nav>
 
+@if(!Auth::check())
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12" >
 
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end ffgg">
+                <a href="{{ route('login') }}" class="btn btn-outline-dark mt-4"><i class="fas fa-lock"></i> Login</a>
+{{--                <a href="{{ route('register-user') }}" class="btn btn-dark mt-4"><i class="far fa-user"></i> Create A Free Account</a>--}}
+            </div>
+
+{{--            <ul class="nav_main d-md-flex justify-content-md-end">--}}
+{{--                <li><a href="{{ route('login') }}" class="btn btn-outline-dark btn-lg mt-4"><i class="fas fa-lock"></i> Login</a></li>--}}
+{{--                <li><a href="{{ route('register-user') }}" class="btn btn-dark btn-lg mt-4"><i class="far fa-user"></i> Create A Free Account</a></li>--}}
+{{--            </ul>--}}
+
+        </div>
+    </div>
+</div>
+@endif
+
+
+
+@if(Auth::check() && auth()->user()->email_verified_at == null)
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="alert alert-info">
+                    <i class="fas fa-info"></i> Please check your email Inbox/SPAM folder and Verify your account.
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
 
 {{--@if (Auth::check())--}}
 {{--<p>&nbsp;</p>--}}

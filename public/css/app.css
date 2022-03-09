@@ -11407,7 +11407,7 @@ label {
 }
 
 .navbar {
-  margin-bottom: 60px;
+  margin-bottom: 20px;
   border-bottom: 2px solid #444;
   padding: 10px;
 }
@@ -11561,7 +11561,8 @@ label {
 }
 
 .cta-one {
-  height: 640px;
+  padding: 20px;
+  min-height: 640px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -11575,7 +11576,8 @@ label {
 }
 
 .cta-two {
-  height: 640px;
+  padding: 20px;
+  min-height: 640px;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -11638,5 +11640,56 @@ footer ul li a {
 
 .fs-2 {
   font-size: 1.5rem !important;
-  line-height: 38px !important;
+  line-height: 30px !important;
+}
+
+.nav_main li {
+  list-style: none;
+  float: left;
+  margin-right: 20px;
+}
+
+.image_one {
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.fs-2 {
+  font-size: 20px !important;
+}
+
+.fs-6 {
+  font-size: 12px !important;
+}
+
+.ffgg {
+  margin-right: 30px !important;
+}
+
+@media only screen and (min-width: 320px) and (max-width: 800px) {
+  .display-5 {
+    font-size: 2rem;
+  }
+
+  .image_one {
+    font-size: 22px;
+    line-height: 32px;
+  }
+
+  .cta-two {
+    min-height: 340px;
+  }
+
+  .btn-dark {
+    font-size: 16px;
+  }
+
+  .fs-5 {
+    font-size: 1rem !important;
+    line-height: 25px !important;
+  }
+
+  .ffgg {
+    margin-right: 0px !important;
+  }
 }

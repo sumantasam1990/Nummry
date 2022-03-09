@@ -116,6 +116,8 @@ Route::middleware(['auth'])->prefix('administrator')->group(function () {
 
     Route::get('admin/view-progress-metrics/{title_id}/{stat_id}', [\App\Http\Controllers\AdminController::class, 'view_progress_metrics'])->name('admin.view.progress.metrics');
 
+    Route::get('admin/users', [\App\Http\Controllers\AdminController::class, 'users_list'])->name('admin.users');
+
 
 });
 

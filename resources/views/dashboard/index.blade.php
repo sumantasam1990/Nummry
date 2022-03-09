@@ -17,11 +17,11 @@
 {{--            </div>--}}
             @if(auth()->user()->user_type != 'teacher')
             <div class="col-md-3">
-                <a class="btn btn-dark" href="{{ route('teacher.invitation') }}">Invite Teacher</a>
+                <a class="btn btn-dark" href="{{ route('teacher.invitation') }}"><i class="fas fa-envelope"></i> Invite Tutor</a>
             </div>
             @endif
             <div class="col-md-3">
-                <a class="btn btn-link text-danger" href="{{ route('signout') }}">Sign out</a>
+                <a class="btn btn-link text-danger" href="{{ route('signout') }}">Sign out </a>
             </div>
         </div>
     </div>
