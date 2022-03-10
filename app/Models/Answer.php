@@ -24,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|Answer whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Answer whereUpdatedAt($value)
+ * @property int|null $image
+ * @method static \Illuminate\Database\Eloquent\Builder|Answer whereImage($value)
  */
 class Answer extends Model
 {

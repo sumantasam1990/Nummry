@@ -38,6 +38,10 @@ use Laravel\Sanctum\HasApiTokens;
  * @mixin \Eloquent
  * @property string|null $user_type
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUserType($value)
+ * @property string|null $promo
+ * @property string|null $referral
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePromo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereReferral($value)
  */
 class User extends Authenticatable implements MustVerifyEmail
 {

@@ -80,13 +80,13 @@
 
         </script>
 
-        <div class="col-md-8" id="html">
+        <div class="col-md-10" id="html">
             <div class="row">
-                <div class="col-md-6 text-center">
+                <div class="col-md-3 text-center">
                     <h2>{{ $question->subject_name }}</h2>
                     <h4 class="mt-4">{{ $question->question_name }}</h4>
                 </div>
-                <div class="col-md-6 question-box text-center">
+                <div class="col-md-9 question-box text-center">
                     @if(count($pause_resume_chk) === 0)
                     <form id="frm_details" name="frm_details" method="post">
                         @else
@@ -99,24 +99,49 @@
                             {{ $question->question_main }}
 
                         @else
-                            {{ $question->question_main }}
+                                @if($question->q_image === 1)
+                                    <img style="width: 300px; height: 300px; object-fit: cover;" src="{{ asset('uploads/' . $question->question_main) }}">
+                                @else
+                                    {{ $question->question_main }}
+                                @endif
 
-                            <div class="row">
+                            <div class="row mt-6 mb-4">
                                 <div class="col-md-3">
-                                    <input type="radio" name="ans" value="{{ $question->q_one }}">
-                                    {{ $question->q_one }}
+
+                                    @if($question->q_image === 1)
+                                        <input type="radio" name="ans" value="1">
+                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_one) }}">
+                                    @else
+                                        <input type="radio" name="ans" value="{{ $question->q_one }}">
+                                        {{ $question->q_one }}
+                                    @endif
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="radio" name="ans" value="{{ $question->q_two }}">
-                                    {{ $question->q_two }}
+                                    @if($question->q_image === 1)
+                                        <input type="radio" name="ans" value="2">
+                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_two) }}">
+                                    @else
+                                        <input type="radio" name="ans" value="{{ $question->q_two }}">
+                                        {{ $question->q_two }}
+                                    @endif
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="radio" name="ans" value="{{ $question->q_three }}">
-                                    {{ $question->q_three }}
+                                    @if($question->q_image === 1)
+                                        <input type="radio" name="ans" value="3">
+                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_three) }}">
+                                    @else
+                                        <input type="radio" name="ans" value="{{ $question->q_three }}">
+                                        {{ $question->q_three }}
+                                    @endif
                                 </div>
                                 <div class="col-md-3">
-                                    <input type="radio" name="ans" value="{{ $question->q_four }}">
-                                    {{ $question->q_four }}
+                                    @if($question->q_image === 1)
+                                        <input type="radio" name="ans" value="4">
+                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_four) }}">
+                                    @else
+                                        <input type="radio" name="ans" value="{{ $question->q_four }}">
+                                        {{ $question->q_four }}
+                                    @endif
                                 </div>
                             </div>
 
@@ -154,7 +179,7 @@
             </div>
         </div>
         {{--        timer--}}
-        <div class="col-md-4 text-center">
+        <div class="col-md-2 text-center">
 
             @if(count($pause_resume_chk) === 0)
             <p id="timer"></p>

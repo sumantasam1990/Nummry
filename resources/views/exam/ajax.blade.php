@@ -58,65 +58,94 @@
 </script>
 
 <div class="row">
-    <div class="col-md-6 text-center">
-        <h2>{{ $question->subject_name }}</h2>
-        <h4 class="mt-4">{{ $question->question_name }}</h4>
-    </div>
-    <div class="col-md-6 question-box text-center">
+<div class="col-md-3 text-center">
+    <h2>{{ $question->subject_name }}</h2>
+    <h4 class="mt-4">{{ $question->question_name }}</h4>
+</div>
+<div class="col-md-9 question-box text-center">
         <form id="frm_details" name="frm_details" method="post">
-            @csrf
-            <p class="p">
-            @if($question->q_one == '')
-                {{ $question->question_main }}
 
-            @else
-                {{ $question->question_main }}
+                    @csrf
+                    <p class="p">
+                        @if($question->q_one == '')
+                            {{ $question->question_main }}
 
-                <div class="row">
-                    <div class="col-md-3">
-                        <input type="radio" name="ans" value="{{ $question->q_one }}">
-                        {{ $question->q_one }}
+                        @else
+                            @if($question->q_image === 1)
+                                <img style="width: 300px; height: 300px; object-fit: cover;" src="{{ asset('uploads/' . $question->question_main) }}">
+                    @else
+                        {{ $question->question_main }}
+                    @endif
+
+                    <div class="row mt-6 mb-4">
+                        <div class="col-md-3">
+
+                            @if($question->q_image === 1)
+                                <input type="radio" name="ans" value="1">
+                                <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_one) }}">
+                            @else
+                                <input type="radio" name="ans" value="{{ $question->q_one }}">
+                                {{ $question->q_one }}
+                            @endif
+                        </div>
+                        <div class="col-md-3">
+                            @if($question->q_image === 1)
+                                <input type="radio" name="ans" value="2">
+                                <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_two) }}">
+                            @else
+                                <input type="radio" name="ans" value="{{ $question->q_two }}">
+                                {{ $question->q_two }}
+                            @endif
+                        </div>
+                        <div class="col-md-3">
+                            @if($question->q_image === 1)
+                                <input type="radio" name="ans" value="3">
+                                <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_three) }}">
+                            @else
+                                <input type="radio" name="ans" value="{{ $question->q_three }}">
+                                {{ $question->q_three }}
+                            @endif
+                        </div>
+                        <div class="col-md-3">
+                            @if($question->q_image === 1)
+                                <input type="radio" name="ans" value="4">
+                                <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_four) }}">
+                            @else
+                                <input type="radio" name="ans" value="{{ $question->q_four }}">
+                                {{ $question->q_four }}
+                            @endif
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <input type="radio" name="ans" value="{{ $question->q_two }}">
-                        {{ $question->q_two }}
-                    </div>
-                    <div class="col-md-3">
-                        <input type="radio" name="ans" value="{{ $question->q_three }}">
-                        {{ $question->q_three }}
-                    </div>
-                    <div class="col-md-3">
-                        <input type="radio" name="ans" value="{{ $question->q_four }}">
-                        {{ $question->q_four }}
-                    </div>
-                </div>
 
-                @endif
+                    @endif
 
-                </p>
+                    </p>
 
 
-                <input type="hidden" class="@error('hd_q_id') is-invalid @enderror" name="hd_q_id" value="{{ $question->id }}">
-                <input type="hidden" class="@error('less_id') is-invalid @enderror" name="less_id" value="{{ $question->lesson_id }}">
+                    <input type="hidden" class="@error('hd_q_id') is-invalid @enderror" name="hd_q_id" value="{{ $question->id }}">
+                    <input type="hidden" class="@error('less_id') is-invalid @enderror" name="less_id" value="{{ $question->lesson_id }}">
 
-                @if($question->q_one == '')
-                    <div class="form-group mb-4">
-                        <input type="text" autocomplete="off" name="ans" class="form-control @error('ans') is-invalid @enderror">
-                        @if ($errors->has('ans'))
-                            <span class="text-danger">{{ $errors->first('ans') }}</span>
-                        @endif
-                    </div>
-                @endif
+                    @if($question->q_one == '')
+                        <div class="form-group mb-4">
+                            <input type="text" autocomplete="off" name="ans" class="form-control @error('ans') is-invalid @enderror">
+                            @if ($errors->has('ans'))
+                                <span class="text-danger">{{ $errors->first('ans') }}</span>
+                            @endif
+                        </div>
+                    @endif
 
-                <div class="d-grid gap-2 col-6 mx-auto">
-                    <button type="submit" class="btn btn-primary btn-lg mb-4">Submit</button>
 
-                    <p id="correct" style="background: #eee; padding: 6px; display: none;" class="fs-2 text-success fw-bold"> <i class="bi bi-check2"></i> Correct</p>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-primary btn-lg mb-4">Submit</button>
 
-                    <p id="incorrect" style="background: #eee; padding: 6px; display: none;" class="fs-2 text-danger fw-bold"><i class="bi bi-x-circle"></i> Incorrect</p>
+                            <p id="correct" style="background: #eee; padding: 6px; display: none;" class="fs-2 text-success fw-bold"> <i class="bi bi-check2"></i> Correct</p>
 
-                </div>
-        </form>
+                            <p id="incorrect" style="background: #eee; padding: 6px; display: none;" class="fs-2 text-danger fw-bold"><i class="bi bi-x-circle"></i> Incorrect</p>
 
-    </div>
+                        </div>
+
+
+                </form>
+
+</div>
 </div>

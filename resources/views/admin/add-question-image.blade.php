@@ -3,11 +3,11 @@
 <div class="container">
     <div class="row">
         <div class="col-10 mx-auto">
-            <h2>Add Question</h2>
+            <h2>Add Image Question</h2>
 
             <a class="btn btn-primary btn-lg mt-2" href="{{ route('admin.question.view', [$lid]) }}">View Questions</a> &nbsp;
 
-            <a class="btn btn-secondary btn-lg mt-2" href="{{ route('admin.add.question.image', [$lid]) }}">Add Image Question</a>
+            <a class="btn btn-secondary btn-lg mt-2" href="{{ route('admin.add.question', [$lid]) }}">Add Text Question</a>
 
         </div>
     </div>
@@ -16,7 +16,7 @@
         @include('layouts.alert')
         <div class="col-md-10 mx-auto">
 
-            <form action="{{ route('admin.add.question.post') }}" method="post">
+            <form action="{{ route('admin.add.question.post.image') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row">
@@ -33,42 +33,39 @@
                         </div>
 
 
-
-
-
                         <div class="form-group mb-3 mt-3">
-                            <label class="fw-bold mb-2">Main Question*</label>
-                            <textarea rows="3" class="form-control" name="main"></textarea>
+                            <label class="fw-bold mb-2">Main Question (Image)*</label>
+                            <input type="file" name="main" class="form-control">
                         </div>
-
 
                     </div>
                     <div class="col-md-6">
                         <div class="form-group mb-3 mt-3">
                             <label class="fw-bold mb-2">Option One (Optional)</label>
-                            <input type="text" name="one" class="form-control">
+                            <input type="file" name="one" class="form-control">
                         </div>
 
                         <div class="form-group mb-3 mt-3">
                             <label class="fw-bold mb-2">Option Two (Optional)</label>
-                            <input type="text" name="two" class="form-control">
+                            <input type="file" name="two" class="form-control">
                         </div>
 
                         <div class="form-group mb-3 mt-3">
                             <label class="fw-bold mb-2">Option Three (Optional)</label>
-                            <input type="text" name="three" class="form-control">
+                            <input type="file" name="three" class="form-control">
                         </div>
 
                         <div class="form-group mb-3 mt-3">
                             <label class="fw-bold mb-2">Option Four (Optional)</label>
-                            <input type="text" name="four" class="form-control">
+                            <input type="file" name="four" class="form-control">
                         </div>
                     </div>
 
                     <div class="col-md-12">
                         <div class="form-group mb-3 mt-3">
-                            <label class="fw-bold mb-2">Correct Answer</label>
+                            <label class="fw-bold mb-2">Correct Answer (Eg. 1/2/3/4)</label>
                             <input type="text" name="correct" class="form-control">
+                            <small>Eg. If Option Two is correct, you should put 2 as a correct answer here.</small>
                         </div>
                     </div>
                 </div>

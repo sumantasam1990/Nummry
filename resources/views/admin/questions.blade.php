@@ -33,15 +33,44 @@
                     <tr>
                         <td>{{ $question->subject_name }}</td>
                         <td>{{ $question->question_name }}</td>
-                        <td>{{ $question->question_main }}</td>
-                        <td>{{ $question->q_one }}</td>
-                        <td>{{ $question->q_two }}</td>
-                        <td>{{ $question->q_three }}</td>
-                        <td>{{ $question->q_four }}</td>
+                        <td>
+                            @if($question->q_image === 1)
+                                <img style="width: 100px; height: 100px; object-fit: cover;" src="{{ asset('uploads/' . $question->question_main) }}">
+                            @else
+                                {{ $question->question_main }}
+                            @endif
+
+                        </td>
+                        <td>
+                            @if($question->q_image === 1)
+                                <img style="width: 100px; height: 100px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_one) }}">
+                            @else
+                                {{ $question->q_one }}
+                            @endif
+                        </td>
+                        <td>
+                            @if($question->q_image === 1)
+                                <img style="width: 100px; height: 100px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_two) }}">
+                            @else
+                                {{ $question->q_two }}
+                            @endif
+                        </td>
+                        <td>
+                            @if($question->q_image === 1)
+                                <img style="width: 100px; height: 100px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_three) }}">
+                            @else
+                                {{ $question->q_three }}
+                            @endif
+                        </td>
+                        <td>
+                            @if($question->q_image === 1)
+                                <img style="width: 100px; height: 100px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_four) }}">
+                            @else
+                                {{ $question->q_four }}
+                            @endif
+                        </td>
                         <td>{{ date('F j, Y', strtotime($question->created_at)) }}</td>
-{{--                        <td>--}}
-{{--                            <a href="{{ route('admin.question.view', [$question->id]) }}" class="nav nav-link">View Results</a>--}}
-{{--                        </td>--}}
+
                     </tr>
                 @endforeach
                 </tbody>

@@ -88,6 +88,10 @@ Route::middleware(['auth'])->prefix('administrator')->group(function () {
 
     Route::post('admin/add-question-post', [\App\Http\Controllers\AdminController::class, 'add_question_post'])->name('admin.add.question.post');
 
+    Route::get('admin/add-question-image/{lid}', [\App\Http\Controllers\AdminController::class, 'add_question_image'])->name('admin.add.question.image');
+
+    Route::post('admin/add-question-post/image', [\App\Http\Controllers\AdminController::class, 'add_question_post_image'])->name('admin.add.question.post.image');
+
     Route::get('admin/add-comparison', [\App\Http\Controllers\AdminController::class, 'add_comparison'])->name('admin.add.comparison');
 
     Route::post('admin/ajax-comparison-post', [\App\Http\Controllers\AdminController::class, 'ajax_comparison'])->name('admin.ajax.comparison.post');

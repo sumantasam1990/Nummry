@@ -49,6 +49,7 @@ class ExamsController extends Controller
             'hd_q_id' => 'required',
         ]);
 
+
         $result = new Result;
 
         $result->question_id = $request->hd_q_id;

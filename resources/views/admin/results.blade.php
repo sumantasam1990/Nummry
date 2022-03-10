@@ -13,7 +13,15 @@
         <div class="col-md-8 mx-auto">
 
             @foreach($results as $result)
-                <h2>Q. {{ $result->question_main }}</h2>
+                <h2>
+                    Q.
+                    @if($result->q_image === 1)
+                        <img style="width: 200px; height: 200px; object-fit: cover;" src="{{ asset('uploads/' . $result->question_main) }}">
+                    @else
+                        {{ $result->question_main }}
+                    @endif
+
+                </h2>
                 <h4 class="mt-4 mb-2">
                     A. {{ $result->answer_user }}
                 </h4>

@@ -143,6 +143,84 @@ class AdminController extends Controller
         return view('admin.add-question', ['title' => 'Add Question', 'lid' => $lid]);
     }
 
+    public function add_question_image($lid)
+    {
+        return view('admin.add-question-image', ['title' => 'Add Question As Image', 'lid' => $lid]);
+    }
+
+    public function add_question_post_image(Request $request)
+    {
+        $request->validate([
+            'subject' => 'required',
+            'question' => 'required',
+            'main' => 'required|image',
+            'lesson_id' => 'required',
+            'correct' => 'required',
+            'one' => 'required|image',
+            'two' => 'required|image',
+            'three' => 'required|image',
+            'four' => 'required|image',
+        ]);
+
+        if ($request->has('main')) {
+            $imageName_main = 'nummry_' . uniqid() . time() . '.' . $request->main->extension();
+            $request->main->move(public_path('uploads'), $imageName_main);
+        }
+        if ($request->has('one')) {
+            $imageName_one = 'nummry_' . uniqid() . time() . '.' . $request->one->extension();
+            $request->one->move(public_path('uploads'), $imageName_one);
+        }
+        if ($request->has('two')) {
+            $imageName_two = 'nummry_' . uniqid() . time() . '.' . $request->two->extension();
+            $request->two->move(public_path('uploads'), $imageName_two);
+        }
+        if ($request->has('three')) {
+            $imageName_three = 'nummry_' . uniqid() . time() . '.' . $request->three->extension();
+            $request->three->move(public_path('uploads'), $imageName_three);
+        }
+        if ($request->has('four')) {
+            $imageName_four = 'nummry_' . uniqid() . time() . '.' . $request->four->extension();
+            $request->four->move(public_path('uploads'), $imageName_four);
+        }
+
+        // start inserting....
+
+        try {
+            $user_id = Lesson::whereId($request->lesson_id)->select('user_id')->first();
+            $question = new Question;
+
+            $question->lesson_id = $request->lesson_id;
+            $question->user_id = $user_id->user_id;
+            $question->status = 0;
+            $question->q_one = $imageName_one;
+            $question->q_two = $imageName_two;
+            $question->q_three = $imageName_three;
+            $question->q_four = $imageName_four;
+            $question->question_main = $imageName_main;
+            $question->question_name = $request->question;
+            $question->subject_name = $request->subject;
+            $question->q_image = 1;
+
+            $question->save();
+
+            // add the correct answer
+
+            $c_ans = new Answer;
+
+            $c_ans->question_id = $question->id;
+            $c_ans->correct_ans = $request->correct;
+            $c_ans->image = 1;
+
+            $c_ans->save();
+
+            return back()->with('msg', 'Image Question Added Successfully.');
+        } catch (\Throwable $th) {
+            return back()->with('err', 'Error! ' . $th->getMessage());
+        }
+
+
+    }
+
     public function add_question_post(Request $request)
     {
         $request->validate([

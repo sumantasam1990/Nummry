@@ -40,6 +40,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereQTwo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Question whereUpdatedAt($value)
+ * @property int|null $q_image
+ * @method static \Illuminate\Database\Eloquent\Builder|Question whereQImage($value)
  */
 class Question extends Model
 {
