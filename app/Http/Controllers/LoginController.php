@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminNotification;
 use App\Mail\InviteTutor;
 use App\Models\TeacherStudent;
 use App\Models\User;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+
 
 class LoginController extends Controller
 {
@@ -107,7 +109,18 @@ class LoginController extends Controller
             $teacherstudent->save();
         }
 
+        $mailArray = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => 'You Have A New Member Join On Nummry',
+            'msg' => "You have a new member join on Nummry."
+        ];
+
         event(new Registered($user));
+
+        Mail::to(env('ADMIN_EMAIL'))->send(new AdminNotification($mailArray));
+
+
 
         return redirect("login")->with('msg', '<p>Please confirm your email to complete the sign up process. </p> <p>We have emailed you a verification. Please check your "SPAM" folder also.</p> <p>Thank you</p> <p>Team Nummry</p>');
     }
@@ -120,7 +133,9 @@ class LoginController extends Controller
             'user_type' => $data['teacher_txt'],
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'parent_name' => $data['parent_name'],
+            'grade' => $data['grade']
         ]);
     }
 

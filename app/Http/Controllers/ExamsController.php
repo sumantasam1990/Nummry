@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AdminNotification;
 use App\Models\Answer;
 use App\Models\Lesson;
 use App\Models\Question;
@@ -11,6 +12,7 @@ use App\Models\TestTime;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ExamsController extends Controller
 {
@@ -95,6 +97,15 @@ class ExamsController extends Controller
                 } elseif ($lessons->complete_status === 4) {
                     Lesson::where('id', $request->less_id)->where('user_id', '=', Auth::user()->id)->update(['complete_status' => 5]);
                 }
+
+                $mailArray = [
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                    'subject' => Auth::user()->name . " has been completed his/her lesson.",
+                    'msg' => Auth::user()->name . " has been completed a lesson successfully."
+                ];
+
+                Mail::to(env('ADMIN_EMAIL'))->send(new AdminNotification($mailArray));
 
                 return response()->json(array('success' => true, 'redirect'=>route('lessons.not-complete')));
             }

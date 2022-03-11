@@ -22,10 +22,26 @@
                         <input style="display: none;" class="form-control" type="text" name="student_email" value="{{ isset($stud_email) ? $stud_email : '' }}">
 
                         <div class="form-group mb-3">
-                            <label class="mb-2">Your Name*</label>
-                            <input type="text" placeholder="Name" id="name" class="form-control @error('name') is-invalid @enderror" name="name" required autofocus value="{{ old('name') }}">
+                            <label class="mb-2">Parent's Name*</label>
+                            <input type="text" placeholder="Parent's Name" id="parent_name" class="form-control @error('parent_name') is-invalid @enderror" name="parent_name" required autofocus value="{{ old('parent_name') }}">
+                            @if ($errors->has('parent_name'))
+                                <span class="text-danger">{{ $errors->first('parent_name') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="mb-2">Child's Name*</label>
+                            <input type="text" placeholder="Child's Name" id="name" class="form-control @error('name') is-invalid @enderror" name="name" required autofocus value="{{ old('name') }}">
                             @if ($errors->has('name'))
                                 <span class="text-danger">{{ $errors->first('name') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="mb-2">Grade that your child is in*</label>
+                            <input type="text" placeholder="Grade that your child is in" id="grade" class="form-control @error('grade') is-invalid @enderror" name="grade" required autofocus value="{{ old('grade') }}">
+                            @if ($errors->has('grade'))
+                                <span class="text-danger">{{ $errors->first('grade') }}</span>
                             @endif
                         </div>
 
@@ -69,7 +85,7 @@
 
                         <div class="form-group mb-3">
                             <label class="mb-2">Referral Code (Optional)</label>
-                            <input type="text" placeholder="Optional" id="referral" class="form-control @error('referral') is-invalid @enderror" name="referral" required autofocus value="{{ old('referral') }}">
+                            <input type="text" placeholder="Optional" id="referral" class="form-control @error('referral') is-invalid @enderror" name="referral" autofocus value="{{ old('referral') }}">
                             @if ($errors->has('referral'))
                                 <span class="text-danger">{{ $errors->first('referral') }}</span>
                             @endif

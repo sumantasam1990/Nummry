@@ -15,7 +15,9 @@
                 <tr>
                     <th>Date</th>
                     <th>User Type</th>
-                    <th>Name</th>
+                    <th>Child's Name</th>
+                    <th>Parent's Name</th>
+                    <th>Child's Grade</th>
                     <th>Email</th>
                     <th>Promo Code</th>
                     <th>Referral Code</th>
@@ -27,6 +29,8 @@
                         <td>{{ date('F j, Y', strtotime($user->created_at)) }}</td>
                         <td>{{ ($user->user_type == 'teacher' ? 'Teacher' : 'parent/Kid') }}</td>
                         <td>{{ $user->name }}</td>
+                        <td>{{ $user->parent_name }}</td>
+                        <td>{{ $user->grade }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->promo }}</td>
                         <td>{{ $user->referral }}</td>
