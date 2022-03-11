@@ -266,14 +266,14 @@
                 <div class="col-12">
                     <h2 class="fs-2 fw-bold text-primary">Base Weekly.</h2>
                     <p class="fs-6 aaa">
-                        Our base weekly price without any discounts and promotion codes will be $375 per week with unlimited kids from the same household under one account. This includes 2 hours per week of one-on-one online tutoring.
+                        Our base weekly price without any discounts and promotion codes will be $375 per week. This includes 2 hours per week of one-on-one online tutoring.
                     </p>
                 </div>
 
                 <div class="col-12">
                     <h2 class="fs-2 fw-bold text-primary">Promo Weekly.</h2>
                     <p class="fs-6 aaa">
-                        Use a promotion code that you received from a friend, family member or Nummry to get a permanent discount off the base weekly fee. This will equal to $300 per week with unlimited kids from the same household under one account. This includes 2 hours per week of one-on-one online tutoring.
+                        Use a promotion code that you received from a friend, family member or Nummry to get a permanent discount off the base weekly fee. This will equal to $300 per week. This includes 2 hours per week of one-on-one online tutoring.
                     </p>
                 </div>
 
@@ -287,7 +287,7 @@
                 <div class="col-12">
                     <h2 class="fs-2 fw-bold text-primary">Least Expensive.</h2>
                     <p class="fs-6 aaa">
-                        If both of your referrals remain paid users for one month, your permanent weekly price will be just $100 per week for an unlimited number of children in your household. This includes 2 hours per week of one-on-one online tutoring.
+                        If both of your referrals remain paid users for one month, your permanent weekly price will be just $100 per week. This includes 2 hours per week of one-on-one online tutoring.
                     </p>
                 </div>
 
