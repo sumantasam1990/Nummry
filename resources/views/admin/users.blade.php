@@ -19,6 +19,7 @@
                     <th>Parent's Name</th>
                     <th>Child's Grade</th>
                     <th>Email</th>
+                    <th>Phone</th>
                     <th>Promo Code</th>
                     <th>Referral Code</th>
                 </tr>
@@ -32,6 +33,7 @@
                         <td>{{ $user->parent_name }}</td>
                         <td>{{ $user->grade }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>{{ $user->phone }}</td>
                         <td>{{ $user->promo }}</td>
                         <td>{{ $user->referral }}</td>
 {{--                        <td>--}}

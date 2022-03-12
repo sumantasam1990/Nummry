@@ -54,6 +54,14 @@
                         </div>
 
                         <div class="form-group mb-3">
+                            <label class="mb-2">Phone Number*</label>
+                            <input type="text" placeholder="Phone Number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}">
+                            @if ($errors->has('phone'))
+                                <span class="text-danger">{{ $errors->first('phone') }}</span>
+                            @endif
+                        </div>
+
+                        <div class="form-group mb-3">
                             <label class="mb-2">Your Password*</label>
                             <input type="password" placeholder="Password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" {{ old('password') }} required autocomplete="offf">
                             @if ($errors->has('password'))

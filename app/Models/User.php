@@ -60,7 +60,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'promo',
         'referral',
         'parent_name',
-        'grade'
+        'grade',
+        'phone'
     ];
 
     /**

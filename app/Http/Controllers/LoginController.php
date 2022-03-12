@@ -79,6 +79,7 @@ class LoginController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6',
+            'phone' => 'required'
 //            'user_type' => 'required|in:Buyer,Agent'
 
         ]);
@@ -135,7 +136,8 @@ class LoginController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'parent_name' => $data['parent_name'],
-            'grade' => $data['grade']
+            'grade' => $data['grade'],
+            'phone' => $data['phone']
         ]);
     }
 
