@@ -304,7 +304,7 @@
 //-------------
 
 
-    setInterval(function () {
+        setInterval(function () {
         $.ajax({
             url: '{{ route('timer') }}',
             type: "post",
