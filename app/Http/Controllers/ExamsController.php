@@ -51,6 +51,8 @@ class ExamsController extends Controller
 
     public function submit_answer(Request $request): \Illuminate\Http\JsonResponse
     {
+
+
         $request->validate([
             'hd_q_id' => 'required',
         ]);
@@ -72,34 +74,38 @@ class ExamsController extends Controller
         $result->save();
 
         // End time timer
-        TestTime::where('lesson_id', $request->less_id)->where('user_id', '=', Auth::user()->id)->update(['end_time' => date('Y-m-d H:i:s'), 'question_id' => $request->hd_q_id]); // question id die update krte hbe
+        TestTime::where('lesson_id', $request->less_id)->where('user_id', '=', Auth::user()->id)->where('question_id', '=', $request->hd_q_id)->update(['end_time' => date('Y-m-d H:i:s')]);
+        // question id die update krte hbe
         // end timer
 
         $answer = Answer::whereQuestionId($request->hd_q_id)->select('correct_ans')->first();
 
         //update question table
-        Question::where('id', $request->hd_q_id)->update(['status' => 1]);
+        Question::where('id', '=', $request->hd_q_id)->update(['status' => 1]);
 
         if($answer->correct_ans == $request->ans || $answer->correct_ans == $request->mcq)
         {
             $question = Question::where('lesson_id', $request->less_id)->where('user_id', Auth::user()->id)->where('status', 0)->get();
 
-            // start time timer
-            $testtime_insert = new TestTime;
-            $testtime_insert->user_id = Auth::user()->id;
-            $testtime_insert->lesson_id = $request->less_id;
-            $testtime_insert->start_time = date('Y-m-d H:i:s');
-            $testtime_insert->question_id = $question[0]->id;
-            $testtime_insert->save();
-            // end
+            if(count($question) > 0) {
+                // start time timer
+                $testtime_insert = new TestTime;
+                $testtime_insert->user_id = Auth::user()->id;
+                $testtime_insert->lesson_id = $request->less_id;
+                $testtime_insert->start_time = date('Y-m-d H:i:s');
+                $testtime_insert->question_id = $question[0]->id;
+                $testtime_insert->save();
+                // end
+            }
+
 
             if(count($question) > 0) {
-                $returnHTML = view('exam.ajax', ['title' => 'Exam Portal', 'question' => $question[0], 'lesson_id' => $request->less_id])->render();
+                $returnHTML = view('exam.ajax', ['title' => 'Exam Portal', 'question' => $question[0]])->render();
                 return response()->json(array('success' => true, 'html'=>$returnHTML, 'correct'=>true));
             } else {
                 //checking end time of the test
 
-                TestTime::where('lesson_id', $request->less_id)->where('user_id', '=', Auth::user()->id)->update(['end_time' => date('Y-m-d H:i:s'), 'question_id' => $request->hd_q_id]);
+//                TestTime::where('lesson_id', $request->less_id)->where('user_id', '=', Auth::user()->id)->where('question_id', '=', $request->hd_q_id)->update(['end_time' => date('Y-m-d H:i:s')]);
 
                 // mark lesson completed
                 $lessons = Lesson::whereId($request->less_id)->select('complete_status')->first();
@@ -119,7 +125,7 @@ class ExamsController extends Controller
                     'msg' => Auth::user()->name . " has been completed a lesson successfully."
                 ];
 
-                Mail::to(env('ADMIN_EMAIL'))->send(new AdminNotification($mailArray));
+                //Mail::to(env('ADMIN_EMAIL'))->send(new AdminNotification($mailArray));
 
                 return response()->json(array('success' => true, 'redirect'=>route('lessons.not-complete')));
             }
@@ -127,23 +133,25 @@ class ExamsController extends Controller
         } else {
             $question = Question::where('lesson_id', $request->less_id)->where('user_id', Auth::user()->id)->where('status', 0)->get();
 
-            // start time timer
-            $testtime_insert2 = new TestTime;
-            $testtime_insert2->user_id = Auth::user()->id;
-            $testtime_insert2->lesson_id = $request->less_id;
-            $testtime_insert2->start_time = date('Y-m-d H:i:s');
-            $testtime_insert2->question_id = $question[0]->id;
-            $testtime_insert2->save();
-            // end
+            if(count($question) > 0) {
+                // start time timer
+                $testtime_insert2 = new TestTime;
+                $testtime_insert2->user_id = Auth::user()->id;
+                $testtime_insert2->lesson_id = $request->less_id;
+                $testtime_insert2->start_time = date('Y-m-d H:i:s');
+                $testtime_insert2->question_id = $question[0]->id;
+                $testtime_insert2->save();
+                // end
+            }
+
 
             if(count($question) > 0) {
-                $returnHTML = view('exam.ajax', ['title' => 'Exam Portal', 'question' => $question[0], 'lesson_id' => $request->less_id])->render();
+                $returnHTML = view('exam.ajax', ['title' => 'Exam Portal', 'question' => $question[0]])->render();
                 return response()->json(array('success' => true, 'html'=>$returnHTML, 'correct'=> false));
             } else {
                 //checking end time of the test
 
-
-                TestTime::where('lesson_id', $request->less_id)->where('user_id', '=', Auth::user()->id)->update(['end_time' => date('Y-m-d H:i:s'), 'question_id' => $request->hd_q_id]);
+//                TestTime::where('lesson_id', $request->less_id)->where('user_id', '=', Auth::user()->id)->where('question_id', '=', $request->hd_q_id)->update(['end_time' => date('Y-m-d H:i:s')]);
 
                 // mark lesson completed
                 $lessons = Lesson::whereId($request->less_id)->select('complete_status')->first();
@@ -155,6 +163,15 @@ class ExamsController extends Controller
                 } elseif ($lessons->complete_status === 4) {
                     Lesson::where('id', $request->less_id)->where('user_id', '=', Auth::user()->id)->update(['complete_status' => 5]);
                 }
+
+                $mailArray = [
+                    'name' => Auth::user()->name,
+                    'email' => Auth::user()->email,
+                    'subject' => Auth::user()->name . " has been completed his/her lesson.",
+                    'msg' => Auth::user()->name . " has been completed a lesson successfully."
+                ];
+
+                //Mail::to(env('ADMIN_EMAIL'))->send(new AdminNotification($mailArray));
 
                 return response()->json(array('success' => true, 'redirect'=>route('lessons.not-complete')));
             }
@@ -168,14 +185,19 @@ class ExamsController extends Controller
     {
         $question = Question::where('lesson_id', $request->time_less)->where('user_id', Auth::user()->id)->where('status', 0)->get();
 
-        $testtimee = \App\Models\TestTime::whereLessonId($request->time_less)->where('user_id', '=', Auth::user()->id)->where('question_id', '=', $question[0]->id)->first();
+        if(count($question) > 0) {
+            $testtimee = \App\Models\TestTime::whereLessonId($request->time_less)->where('user_id', '=', Auth::user()->id)->where('question_id', '=', $question[0]->id)->first();
 
-        $datetime1 = new DateTime();
-        $datetime2 = new DateTime($testtimee->start_time);
-        $interval = $datetime1->diff($datetime2);
-        //$elapsed = $interval->format('%y years %m months %d days %h hours %i minutes %s seconds');
-        $elapsed = $interval->format('%h hours %i minutes %s seconds');
-        return response()->json(array('time' => $elapsed));
+            $datetime1 = new DateTime();
+            $datetime2 = new DateTime($testtimee->start_time);
+            $interval = $datetime1->diff($datetime2);
+            //$elapsed = $interval->format('%y years %m months %d days %h hours %i minutes %s seconds');
+            $elapsed = $interval->format('%h hours %i minutes %s seconds');
+            return response()->json(array('time' => $elapsed));
+        } else {
+            return response()->json(array('time' => "nan"));
+        }
+
     }
 
     // Tests code
@@ -213,6 +235,7 @@ class ExamsController extends Controller
         $resumepause->pause = date('Y-m-d H:i:s');
         $resumepause->lesson_id = $request->str_l;
         $resumepause->user_id = Auth::user()->id;
+        $resumepause->question_id = $request->question_id;
 
         $resumepause->save();
 
@@ -223,7 +246,7 @@ class ExamsController extends Controller
 
     public function resume_timer_ajax(Request $request)
     {
-        ResumePause::where('lesson_id', $request->str_l)->where('user_id', '=', Auth::user()->id)->where('resume', '=', null)->update(['resume' => date('Y-m-d H:i:s')]);
+        ResumePause::where('lesson_id', $request->str_l)->where('user_id', '=', Auth::user()->id)->where('question_id', '=', $request->question_id)->where('resume', '=', null)->update(['resume' => date('Y-m-d H:i:s')]);
 
         Lesson::where('id', $request->str_l)->where('user_id', '=', Auth::user()->id)->update(['pause_timer' => 0]);
 

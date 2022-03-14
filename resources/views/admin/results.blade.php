@@ -30,32 +30,91 @@
                 @else
                     <p class="text-danger fw-bold">( Incorrect Answer ) <span class="text-success">{{ $result->correct_ans }}</span></p>
                 @endif
+
+{{--                time taken--}}
+
+                @php
+                        $testtimes = \App\Models\TestTime::whereLessonId($lesson->id)->where('question_id', '=', $result->qidd)->first();
+
+                    if(isset($testtimes->start_time) != null){
+
+                        $resume_pause = \App\Models\ResumePause::whereLessonId($lesson->id)->where('question_id', '=', $result->qidd)->get();
+
+                        if(count($resume_pause) > 0) {
+                    foreach($resume_pause as $rp) {
+                        $date1 = new DateTime($rp->resume);
+                        $date2 = new DateTime($rp->pause);
+                        $diff = $date1->diff($date2);
+                        $diff_f[] = $diff->i;
+                        $diff_f_sec[] = $diff->s;
+                        $diff_f_h[] = $diff->h;
+                        $diff_f_m[] = $diff->m;
+                        $diff_f_y[] = $diff->y;
+                        $diff_f_day[] = $diff->d;
+                    }
+
+                    $datetime1 = new DateTime($testtimes->start_time);
+                    $datetime2 = new DateTime($testtimes->end_time);
+                    $interval = $datetime1->diff($datetime2);
+
+                    $minute = $interval->i - array_sum($diff_f);
+                    $seconds = $interval->s - array_sum($diff_f_sec);
+                    $hour = $interval->h - array_sum($diff_f_h);
+                    $day = $interval->d - array_sum($diff_f_day);
+                    $month = $interval->m - array_sum($diff_f_m);
+                    $year = $interval->y - array_sum($diff_f_y);
+
+                    echo "Time took: " . abs($hour) . " hour " . abs($minute) . " minutes " . abs($seconds) . " seconds";
+
+
+                } else {
+                    $datetime1 = new DateTime($testtimes->start_time);
+                    $datetime2 = new DateTime($testtimes->end_time);
+                    $interval = $datetime1->diff($datetime2);
+
+                    $minute = $interval->i;
+                    $seconds = $interval->s;
+                    $hour = $interval->h;
+                    $day = $interval->d;
+                    $month = $interval->m;
+                    $year = $interval->y;
+
+                    echo "Time took: " . abs($hour) . " hour " . abs($minute) . " minutes " . abs($seconds) . " seconds";
+
+                }
+
+                    }
+
+                @endphp
+
+
+
             @endforeach
 
-            <hr>
+{{--            <hr>--}}
 
-            <p class="fs-5">Start Time:
-                <span class="fw-bold">
-                {{ date('F j, Y h:i:s A', strtotime($testtimes->start_time)) }}
-                </span>
-            </p>
+{{--            <p class="fs-5">Start Time:--}}
+{{--                <span class="fw-bold">--}}
+{{--                {{ date('F j, Y h:i:s A', strtotime($testtimes->start_time)) }}--}}
+{{--                </span>--}}
+{{--            </p>--}}
 
-                <p class="fs-5">End Time:
-                    <span class="fw-bold">
-                {{ ($testtimes->end_time != '' ? date('F j, Y h:i:s A', strtotime($testtimes->end_time)) : 'NaN') }}
-                </span>
-                </p>
+{{--                <p class="fs-5">End Time:--}}
+{{--                    <span class="fw-bold">--}}
+{{--                {{ ($testtimes->end_time != '' ? date('F j, Y h:i:s A', strtotime($testtimes->end_time)) : 'NaN') }}--}}
+{{--                </span>--}}
+{{--                </p>--}}
 
-            <p class="fs-3">
-                Time Taken:
-                @if($testtimes->end_time != '')
-                <span class="fw-bold">
-                    {{ abs($year) }} year {{ abs($month) }} month {{ abs($day) }} day {{ abs($hour) }} hour {{ abs($minute) }} minute {{ abs($seconds) }} seconds
-                </span>
-                @else
-                    <span class="fw-bold">NaN</span>
-                @endif
-            </p>
+{{--            <p class="fs-3">--}}
+{{--                Time Taken:--}}
+{{--                @if($testtimes->end_time != '')--}}
+{{--                <span class="fw-bold">--}}
+{{--                    {{ abs($year) }} year {{ abs($month) }} month {{ abs($day) }} day {{ abs($hour) }} hour {{ abs($minute) }} minute {{ abs($seconds) }} seconds--}}
+{{--                </span>--}}
+{{--                @else--}}
+{{--                    <span class="fw-bold">NaN</span>--}}
+{{--                @endif--}}
+{{--            </p>--}}
 
 
         </div>

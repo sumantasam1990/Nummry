@@ -81,6 +81,34 @@
         </script>
 
         <div class="col-md-10" id="html">
+            <script>
+
+                function pause_timer_ajax() {
+                    $.ajax({
+                        url: '{{ route('pause.timer.ajax') }}',
+                        type: "post",
+                        data: { "_token": "{{ csrf_token() }}", "str_u": "{{ auth()->user()->id }}", "str_l": "{{ $lesson->id }}", "question_id": "{{ $question->id }}" },
+                        success: function(res) {
+                            window.location.href=res.pr;
+                            // $("#resume_time").show();
+                            // $("#pause_time").hide();
+                        }
+                    });
+                }
+
+                function resume_timer_ajax() {
+                    $.ajax({
+                        url: '{{ route('resume.timer.ajax') }}',
+                        type: "post",
+                        data: { "_token": "{{ csrf_token() }}", "str_u": "{{ auth()->user()->id }}", "str_l": "{{ $lesson->id }}", "question_id": "{{ $question->id }}" },
+                        success: function(res) {
+                            window.location.href=res.pr;
+                            // $("#resume_time").hide();
+                            // $("#pause_time").show();
+                        }
+                    });
+                }
+            </script>
             <div class="row">
                 <div class="col-md-3 text-center">
                     <h2>{{ $question->subject_name }}</h2>
@@ -310,7 +338,11 @@
             type: "post",
             data: { "_token": "{{ csrf_token() }}", "time_less": {{ $lesson->id }} },
             success: function(d) {
-                $("#timer").html(d.time);
+                if(d === "nan") {
+                    $("#timer").html("finished exam.");
+                } else {
+                    $("#timer").html(d.time);
+                }
             }
         });
     }, 500);
@@ -318,31 +350,6 @@
 
 
 
-        function pause_timer_ajax() {
-        $.ajax({
-            url: '{{ route('pause.timer.ajax') }}',
-            type: "post",
-            data: { "_token": "{{ csrf_token() }}", "str_u": "{{ auth()->user()->id }}", "str_l": "{{ $lesson->id }}" },
-            success: function(res) {
-                window.location.href=res.pr;
-                // $("#resume_time").show();
-                // $("#pause_time").hide();
-            }
-        });
-    }
-
-    function resume_timer_ajax() {
-        $.ajax({
-            url: '{{ route('resume.timer.ajax') }}',
-            type: "post",
-            data: { "_token": "{{ csrf_token() }}", "str_u": "{{ auth()->user()->id }}", "str_l": "{{ $lesson->id }}" },
-            success: function(res) {
-                window.location.href=res.pr;
-                // $("#resume_time").hide();
-                // $("#pause_time").show();
-            }
-        });
-    }
 
 </script>
 

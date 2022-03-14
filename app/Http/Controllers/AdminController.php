@@ -80,6 +80,7 @@ class AdminController extends Controller
             ->join('results', 'questions.id', '=', 'results.question_id')
             ->join('answers', 'questions.id', '=', 'answers.question_id')
             ->where('results.lesson_id', '=', $id)
+            ->select('*', 'questions.id as qidd')
             ->get();
 
         if(count($results) === 0) {
@@ -438,7 +439,7 @@ class AdminController extends Controller
 
     public function users_list()
     {
-        $users = User::where('user_type', '!=', 'Administrator')->paginate(50);
+        $users = User::where('user_type', '!=', 'Administrator')->paginate(10);
 
         return view('admin.users', ['title' => 'Users List', 'users' => $users]);
     }

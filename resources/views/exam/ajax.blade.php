@@ -57,6 +57,36 @@
 
 </script>
 
+
+<script>
+
+    function pause_timer_ajax() {
+        $.ajax({
+            url: '{{ route('pause.timer.ajax') }}',
+            type: "post",
+            data: { "_token": "{{ csrf_token() }}", "str_u": "{{ auth()->user()->id }}", "str_l": "{{ $question->lesson_id }}", "question_id": "{{ $question->id }}" },
+            success: function(res) {
+                window.location.href=res.pr;
+                // $("#resume_time").show();
+                // $("#pause_time").hide();
+            }
+        });
+    }
+
+    function resume_timer_ajax() {
+        $.ajax({
+            url: '{{ route('resume.timer.ajax') }}',
+            type: "post",
+            data: { "_token": "{{ csrf_token() }}", "str_u": "{{ auth()->user()->id }}", "str_l": "{{ $question->lesson_id }}", "question_id": "{{ $question->id }}" },
+            success: function(res) {
+                window.location.href=res.pr;
+                // $("#resume_time").hide();
+                // $("#pause_time").show();
+            }
+        });
+    }
+</script>
+
 <div class="row">
 <div class="col-md-3 text-center">
     <h2>{{ $question->subject_name }}</h2>
