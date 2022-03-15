@@ -27,7 +27,7 @@
     <div class="row mt-4">
         @foreach($lessons as $lesson)
             <div class="col-md-3">
-                <a href="#">
+                <a href="{{ route('lessons.results', [$lesson->id]) }}">
                     <div class="card text-white bg-primary mb-3">
                         <div class="card-body">
                             <h5 class="card-title">{{ date('F j, Y', strtotime($lesson->datetime)) }}</h5>

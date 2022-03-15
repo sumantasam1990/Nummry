@@ -20,13 +20,13 @@
                 <div class="form-group">
                     <label class="fw-bold mb-3">Enter Your New Password</label>
                     <input type="password" required name="password" class="form-control"
-                           placeholder="Your Registered Email ID">
+                           placeholder="Enter Your New Password">
                 </div>
 
                 <div class="form-group">
                     <label class="fw-bold mb-3">Confirm Password</label>
                     <input type="password" required name="password_confirmation" class="form-control"
-                           placeholder="Your Registered Email ID">
+                           placeholder="Confirm Password">
                 </div>
                 <button type="submit" class="btn btn-dark mt-4">Submit</button>
             </form>

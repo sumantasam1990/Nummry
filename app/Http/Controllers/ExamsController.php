@@ -204,6 +204,38 @@ class ExamsController extends Controller
 
     public function index_test($id)
     {
+        $question = Question::where('lesson_id', $id)->where('user_id', Auth::user()->id)->where('status', 0)->get();
+
+        if(count($question) === 0) {
+            return redirect(route('dashboard'))->with('You have already completed this lesson successfully.');
+        }
+
+
+        $pause_resume_chk = Lesson::whereId($id)->where('pause_timer', '=', '1')->select('pause_timer')->get();
+
+        //checking start time of the test
+        $testtime = TestTime::whereLessonId($id)->where('user_id', '=', Auth::user()->id)->where('question_id', '=', $question[0]->id)->get();
+
+        if(count($testtime) === 0) {
+            $testtime = new TestTime;
+            $testtime->start_time = date("Y-m-d H:i:s");
+            $testtime->user_id = Auth::user()->id;
+            $testtime->lesson_id = $id;
+            $testtime->question_id = $question[0]->id;
+            $testtime->save();
+        }
+
+        $lesson = Lesson::whereId($id)->select('id', 'datetime')->first();
+
+        if (count($question) > 0) {
+            return view('exam.index', ['title' => 'Exam Portal', 'question' => $question[0], 'lesson' => $lesson, 'testtime' => $testtime, 'pause_resume_chk' => $pause_resume_chk]);
+        } else {
+            return back()->with('info','You have already completed this lesson.');
+        }
+    }
+
+    public function index_test_old($id)
+    {
         //checking start time of the test
         $testtime = TestTime::whereLessonId($id)->where('user_id', '=', Auth::user()->id)->get();
 

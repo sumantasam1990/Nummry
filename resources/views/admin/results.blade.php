@@ -15,7 +15,7 @@
             @foreach($results as $result)
                 <h2>
                     Q.
-                    @if($result->q_image === 1)
+                    @if($result->q_image > 0)
                         <img style="width: 200px; height: 200px; object-fit: cover;" src="{{ asset('uploads/' . $result->question_main) }}">
                     @else
                         {{ $result->question_main }}

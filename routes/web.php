@@ -38,6 +38,8 @@ Route::middleware(['auth'])->prefix('u')->group(function () {
 
     Route::get('lessons/completed/{id?}', [\App\Http\Controllers\LessonsController::class, 'completed'])->name('lessons.complete');
 
+    Route::get('lessons/results/{id}', [\App\Http\Controllers\LessonsController::class, 'results'])->name('lessons.results');
+
     Route::get('tests/initial/{id?}', [\App\Http\Controllers\TestController::class, 'initial'])->name('test.initial');
 
     Route::get('tests/non-complete/{id?}', [\App\Http\Controllers\TestController::class, 'non_complete'])->name('test.non-complete');

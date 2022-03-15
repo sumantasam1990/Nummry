@@ -157,31 +157,46 @@ class AdminController extends Controller
             'main' => 'required|image',
             'lesson_id' => 'required',
             'correct' => 'required',
-            'one' => 'required|image',
-            'two' => 'required|image',
-            'three' => 'required|image',
-            'four' => 'required|image',
+//            'one' => 'required|image',
+//            'two' => 'required|image',
+//            'three' => 'required|image',
+//            'four' => 'required|image',
         ]);
 
         if ($request->has('main')) {
             $imageName_main = 'nummry_' . uniqid() . time() . '.' . $request->main->extension();
             $request->main->move(public_path('uploads'), $imageName_main);
         }
-        if ($request->has('one')) {
+        if ($request->has('one') && $request->one_txt == '') {
             $imageName_one = 'nummry_' . uniqid() . time() . '.' . $request->one->extension();
             $request->one->move(public_path('uploads'), $imageName_one);
         }
-        if ($request->has('two')) {
+        if ($request->has('two') && $request->two_txt == '') {
             $imageName_two = 'nummry_' . uniqid() . time() . '.' . $request->two->extension();
             $request->two->move(public_path('uploads'), $imageName_two);
         }
-        if ($request->has('three')) {
+        if ($request->has('three') && $request->three_txt == '') {
             $imageName_three = 'nummry_' . uniqid() . time() . '.' . $request->three->extension();
             $request->three->move(public_path('uploads'), $imageName_three);
         }
-        if ($request->has('four')) {
+        if ($request->has('four') && $request->four_txt == '') {
             $imageName_four = 'nummry_' . uniqid() . time() . '.' . $request->four->extension();
             $request->four->move(public_path('uploads'), $imageName_four);
+        }
+
+        //only text
+
+        if (!$request->has('one') && $request->one_txt != '') {
+            $imageName_one = $request->one_txt;
+        }
+        if (!$request->has('two') && $request->two_txt != '') {
+            $imageName_two = $request->two_txt;
+        }
+        if (!$request->has('three') && $request->three_txt != '') {
+            $imageName_three = $request->three_txt;
+        }
+        if (!$request->has('four') && $request->four_txt != '') {
+            $imageName_four = $request->four_txt;
         }
 
         // start inserting....
@@ -200,7 +215,11 @@ class AdminController extends Controller
             $question->question_main = $imageName_main;
             $question->question_name = $request->question;
             $question->subject_name = $request->subject;
-            $question->q_image = 1;
+            if (!$request->has('one') && $request->one_txt != '') {
+                $question->q_image = 2;
+            } else {
+                $question->q_image = 1;
+            }
 
             $question->save();
 

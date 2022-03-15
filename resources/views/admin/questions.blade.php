@@ -34,7 +34,7 @@
                         <td>{{ $question->subject_name }}</td>
                         <td>{{ $question->question_name }}</td>
                         <td>
-                            @if($question->q_image === 1)
+                            @if($question->q_image > 0)
                                 <img style="width: 100px; height: 100px; object-fit: cover;" src="{{ asset('uploads/' . $question->question_main) }}">
                             @else
                                 {{ $question->question_main }}
