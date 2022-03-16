@@ -125,6 +125,8 @@ Route::middleware(['auth'])->prefix('administrator')->group(function () {
 
     Route::get('admin/users', [\App\Http\Controllers\AdminController::class, 'users_list'])->name('admin.users');
 
+    Route::get('admin/question/delete/{id}', [\App\Http\Controllers\AdminController::class, 'question_delete'])->name('admin.question.delete');
+
 
 });
 

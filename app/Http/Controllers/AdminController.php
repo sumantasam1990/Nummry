@@ -7,6 +7,7 @@ use App\Models\Comparison;
 use App\Models\ComparisonCategory;
 use App\Models\Lesson;
 use App\Models\Question;
+use App\Models\Result;
 use App\Models\ResumePause;
 use App\Models\Stat;
 use App\Models\StatProgress;
@@ -65,6 +66,7 @@ class AdminController extends Controller
         $questions = DB::table('questions')
             ->join('users', 'questions.user_id', '=', 'users.id')
             ->where('questions.lesson_id', '=', $id)
+            ->select('users.*', 'questions.id as q_i_d', 'questions.*')
             ->paginate(20);
 
         $lesson = Lesson::whereId($id)->select('datetime', 'user_id', 'id')->first();
@@ -461,5 +463,31 @@ class AdminController extends Controller
         $users = User::where('user_type', '!=', 'Administrator')->paginate(10);
 
         return view('admin.users', ['title' => 'Users List', 'users' => $users]);
+    }
+
+    public function question_delete($id)
+    {
+        try {
+            //checking if question id is exist on results table
+            $result_question_chk = Result::whereQuestionId($id)->select('question_id')->get();
+
+            if(count($result_question_chk) === 0)
+            {
+                $question = Question::find($id);
+                $question->delete();
+
+                DB::table('answers')->where('question_id', $id)->delete();
+                DB::table('testtimes')->where('question_id', $id)->delete();
+
+                return back()
+                    ->with('msg', 'Question has been successfully deleted.');
+            }
+            else
+            {
+                return back()->with('err', 'Sorry! You can not delete this question because, kid is already answered this question.');
+            }
+        } catch (\Throwable $th) {
+            return back()->with('err', 'Something is wrong. Please contact to the developer.');
+        }
     }
 }

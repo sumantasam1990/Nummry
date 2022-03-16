@@ -25,7 +25,7 @@
                     <th>Option Three</th>
                     <th>Option Four</th>
                     <th>Datetime</th>
-{{--                    <th>Action</th>--}}
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -70,6 +70,10 @@
                             @endif
                         </td>
                         <td>{{ date('F j, Y', strtotime($question->created_at)) }}</td>
+
+                        <td>
+                            <a onclick="return confirm('Are you sure?');" class="btn btn-danger btn-sm" href="{{ route('admin.question.delete', [$question->q_i_d]) }}">Delete</a>
+                        </td>
 
                     </tr>
                 @endforeach
