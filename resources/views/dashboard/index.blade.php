@@ -35,7 +35,7 @@
 
     <div class="row">
         <div class="col-12">
-            <h4 class="fw-normal">Lessons</h4> <hr style="width: 200px;">
+            <h4 class="fw-normal">Learning Exercises</h4> <hr style="width: 200px;">
         </div>
     </div>
 

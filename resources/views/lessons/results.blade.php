@@ -13,6 +13,8 @@
         <div class="col-md-8 mx-auto">
 
             @foreach($results as $result)
+                <div style="border: 1px solid #cccccc; padding: 10px; border-radius: 5px !important; margin-bottom: 30px;">
+                    <p>Subject: {{ $result->subject_name }}</p>
                 <h2>
                     Q.
                     @if($result->q_image > 0)
@@ -88,7 +90,7 @@
                 @endphp
 
 
-
+            </div>
             @endforeach
 
             {{--            <hr>--}}

@@ -128,7 +128,7 @@
 
                         @else
                                 @if($question->q_image > 0)
-                                    <img style="width: 300px; height: 300px; object-fit: cover;" src="{{ asset('uploads/' . $question->question_main) }}">
+                                    <a target="_blank" href="{{ asset('uploads/' . $question->question_main) }}"> <img style="width: 300px; height: 300px; object-fit: cover;" src="{{ asset('uploads/' . $question->question_main) }}"></a>
                                 @else
                                     {{ $question->question_main }}
                                 @endif
@@ -138,7 +138,7 @@
 
                                     @if($question->q_image === 1)
                                         <input type="radio" name="ans" value="1">
-                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_one) }}">
+                                        <a target="_blank" href="{{ asset('uploads/' . $question->q_one) }}"> <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_one) }}"></a>
                                     @else
                                         <input type="radio" name="ans" value="1">
                                         {{ $question->q_one }}
@@ -147,7 +147,7 @@
                                 <div class="col-md-3">
                                     @if($question->q_image === 1)
                                         <input type="radio" name="ans" value="2">
-                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_two) }}">
+                                        <a target="_blank" href="{{ asset('uploads/' . $question->q_two) }}"><img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_two) }}"></a>
                                     @else
                                         <input type="radio" name="ans" value="2">
                                         {{ $question->q_two }}
@@ -156,7 +156,7 @@
                                 <div class="col-md-3">
                                     @if($question->q_image === 1)
                                         <input type="radio" name="ans" value="3">
-                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_three) }}">
+                                        <a target="_blank" href="{{ asset('uploads/' . $question->q_three) }}"><img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_three) }}"></a>
                                     @else
                                         <input type="radio" name="ans" value="3">
                                         {{ $question->q_three }}
@@ -165,7 +165,7 @@
                                 <div class="col-md-3">
                                     @if($question->q_image === 1)
                                         <input type="radio" name="ans" value="4">
-                                        <img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_four) }}">
+                                        <a target="_blank" href="{{ asset('uploads/' . $question->q_four) }}"><img style="width: 120px; height: 120px; object-fit: cover;" src="{{ asset('uploads/' . $question->q_four) }}"></a>
                                     @else
                                         <input type="radio" name="ans" value="4">
                                         {{ $question->q_four }}
