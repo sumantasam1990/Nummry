@@ -215,3 +215,7 @@ Route::get('/data-points', [\App\Http\Controllers\StaticController::class, 'data
 Route::get('/privacy', [\App\Http\Controllers\StaticController::class, 'privacy'])->name('privacy');
 
 Route::get('/terms', [\App\Http\Controllers\StaticController::class, 'terms'])->name('terms');
+
+Route::get('/teacher-promotion', [\App\Http\Controllers\StaticController::class, 'teacher_promotion'])->name('teacher.promotion');
+
+Route::post('/teacher-promotion-post-send-email', [\App\Http\Controllers\StaticController::class, 'teacher_promotion_send_email'])->name('teacher.promotion.post');

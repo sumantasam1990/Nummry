@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InviteTutor;
+use App\Mail\TeacherPromotion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -35,6 +36,32 @@ class StaticController extends Controller
     public function terms()
     {
         return view('static.terms', ['title' => 'Terms - Nummry']);
+    }
+
+    public function teacher_promotion()
+    {
+        return view('static.teacher_promotion', ['title' => 'Teacher Promotion - Nummry']);
+    }
+
+    public function teacher_promotion_send_email(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'insta' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $mailArray = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'insta' => $request->insta,
+            'phone' => $request->phone
+        ];
+
+        Mail::to(env('ADMIN_EMAIL'))->send(new TeacherPromotion($mailArray));
+
+        return back()->with('msg', 'Thank you for contacting us.');
     }
 
 }

@@ -51,8 +51,6 @@ class ExamsController extends Controller
 
     public function submit_answer(Request $request): \Illuminate\Http\JsonResponse
     {
-
-
         $request->validate([
             'hd_q_id' => 'required',
         ]);
@@ -273,7 +271,9 @@ class ExamsController extends Controller
 
         Lesson::where('id', $request->str_l)->where('user_id', '=', Auth::user()->id)->update(['pause_timer' => 1]);
 
-        return response()->json(array('pr' => back()));
+        $lesson_token = Lesson::whereId($request->str_l)->select('token')->first();
+
+        return response()->json(array('pr' => route('exam-portal', [$request->str_l, $lesson_token->token])));
     }
 
     public function resume_timer_ajax(Request $request)
@@ -282,6 +282,8 @@ class ExamsController extends Controller
 
         Lesson::where('id', $request->str_l)->where('user_id', '=', Auth::user()->id)->update(['pause_timer' => 0]);
 
-        return response()->json(array('pr' => back()));
+        $lesson_token = Lesson::whereId($request->str_l)->select('token')->first();
+
+        return response()->json(array('pr' => route('exam-portal', [$request->str_l, $lesson_token->token])));
     }
 }
