@@ -57,7 +57,7 @@
             <p class="fs-5">For example, what is the percentage of your subscribers that have a 7 year old child.</p>
 
 
-            <div class="d-grid gap-2 mx-auto col-6 mt-6">
+            <div class="d-grid gap-2 mx-auto col-md-6 mt-6">
                 <a class="btn btn-primary btn-lg" href="{{ route('franchise.signup') }}">Sign Up For More Information</a>
             </div>
 

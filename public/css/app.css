@@ -11410,6 +11410,7 @@ label {
   margin-bottom: 20px;
   border-bottom: 2px solid #444;
   padding: 10px;
+  border-radius: 0 !important;
 }
 
 .navbar-brand {
@@ -11601,6 +11602,7 @@ footer ul {
 
 footer ul li {
   list-style: none;
+  margin-bottom: 10px;
 }
 
 footer ul li a {
@@ -11627,6 +11629,7 @@ footer ul li a {
 
 .footer {
   border-top: 1px solid #000;
+  border-radius: 0 !important;
 }
 
 .display-5 {

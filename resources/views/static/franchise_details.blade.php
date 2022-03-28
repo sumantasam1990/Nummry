@@ -49,7 +49,7 @@
             <p class="fs-5 fw-bold text-black mt-6">Be YOUR OWN BOSS and have YOUR OWN BUSINESS.
             </p>
 
-            <div class="d-grid gap-2 mx-auto col-6 mt-6">
+            <div class="d-grid gap-2 mx-auto col-md-6 mt-6">
                 <a class="btn btn-primary btn-lg" href="{{ route('franchise.signup') }}">Sign Up For More Information</a>
             </div>
 
