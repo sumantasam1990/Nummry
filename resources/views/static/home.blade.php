@@ -9,7 +9,7 @@
         <div class="col-12 mx-auto text-center">
             <h1 class="display-5 fw-bold">The most data-driven online math tutoring service for Pre-K to Grade 12 students.</h1>
             <h4 class="fs-5 mt-4 aaa lh-2">Thanks to over 1,000 of data points, you will know exactly where and by how much your child needs help in math.
-                Refer 2 more students during your first week and get $275 per week off the base price.</h4>
+                $99 per week with a promo code.</h4>
 
             <a href="{{ route('register-user') }}" class="btn btn-dark btn-lg mt-4">Sign Up Now</a>
         </div>
@@ -251,52 +251,52 @@
 
 
 
-<div class="container mt-4">
-    <div class="row mt-50">
-        <div class="col-md-5">
-            <h2 class="fs-1 fw-bold">Our Pricing.</h2>
-            <p class="fs-6 aaa lh-2 mt-4">We offer a base weekly price along with 3 ways to significantly reduce the price that you pay.</p>
-        </div>
+{{--<div class="container mt-4">--}}
+{{--    <div class="row mt-50">--}}
+{{--        <div class="col-md-5">--}}
+{{--            <h2 class="fs-1 fw-bold">Our Pricing.</h2>--}}
+{{--            <p class="fs-6 aaa lh-2 mt-4">We offer a base weekly price along with 3 ways to significantly reduce the price that you pay.</p>--}}
+{{--        </div>--}}
 
-        <div class="col-md-2"></div>
+{{--        <div class="col-md-2"></div>--}}
 
-        <div class="col-md-5">
-            <div class="row">
+{{--        <div class="col-md-5">--}}
+{{--            <div class="row">--}}
 
-                <div class="col-12">
-                    <h2 class="fs-2 fw-bold text-primary">Base Weekly.</h2>
-                    <p class="fs-6 aaa">
-                        Our base weekly price without any discounts and promotion codes will be $375 per week. This includes 2 hours per week of one-on-one online tutoring.
-                    </p>
-                </div>
+{{--                <div class="col-12">--}}
+{{--                    <h2 class="fs-2 fw-bold text-primary">Base Weekly.</h2>--}}
+{{--                    <p class="fs-6 aaa">--}}
+{{--                        Our base weekly price without any discounts and promotion codes will be $375 per week. This includes 2 hours per week of one-on-one online tutoring.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
 
-                <div class="col-12">
-                    <h2 class="fs-2 fw-bold text-primary">Promo Weekly.</h2>
-                    <p class="fs-6 aaa">
-                        Use a promotion code that you received from a friend, family member or Nummry to get a permanent discount off the base weekly fee. This will equal to $300 per week. This includes 2 hours per week of one-on-one online tutoring.
-                    </p>
-                </div>
+{{--                <div class="col-12">--}}
+{{--                    <h2 class="fs-2 fw-bold text-primary">Promo Weekly.</h2>--}}
+{{--                    <p class="fs-6 aaa">--}}
+{{--                        Use a promotion code that you received from a friend, family member or Nummry to get a permanent discount off the base weekly fee. This will equal to $300 per week. This includes 2 hours per week of one-on-one online tutoring.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
 
-                <div class="col-12">
-                    <h2 class="fs-2 fw-bold text-primary">Referral Weekly.</h2>
-                    <p class="fs-6 aaa">
-                        If you sign up 2 more friends or family members during your 7-day free trial, then you will get our lowest fee of only $200 per week with no limits to how many children you can have under one account. The referrals must use a different credit or debit card when signing up for their 7-day free trial and they cannot be from the same household. This includes 2 hours per week of one-on-one online tutoring.
-                    </p>
-                </div>
+{{--                <div class="col-12">--}}
+{{--                    <h2 class="fs-2 fw-bold text-primary">Referral Weekly.</h2>--}}
+{{--                    <p class="fs-6 aaa">--}}
+{{--                        If you sign up 2 more friends or family members during your 7-day free trial, then you will get our lowest fee of only $200 per week with no limits to how many children you can have under one account. The referrals must use a different credit or debit card when signing up for their 7-day free trial and they cannot be from the same household. This includes 2 hours per week of one-on-one online tutoring.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
 
-                <div class="col-12">
-                    <h2 class="fs-2 fw-bold text-primary">Least Expensive.</h2>
-                    <p class="fs-6 aaa">
-                        If both of your referrals remain paid users for one month, your permanent weekly price will be just $100 per week. This includes 2 hours per week of one-on-one online tutoring.
-                    </p>
-                </div>
+{{--                <div class="col-12">--}}
+{{--                    <h2 class="fs-2 fw-bold text-primary">Least Expensive.</h2>--}}
+{{--                    <p class="fs-6 aaa">--}}
+{{--                        If both of your referrals remain paid users for one month, your permanent weekly price will be just $100 per week. This includes 2 hours per week of one-on-one online tutoring.--}}
+{{--                    </p>--}}
+{{--                </div>--}}
 
-            </div>
+{{--            </div>--}}
 
-        </div>
+{{--        </div>--}}
 
-    </div>
-</div>
+{{--    </div>--}}
+{{--</div>--}}
 
 
 

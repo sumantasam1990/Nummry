@@ -219,3 +219,54 @@ Route::get('/terms', [\App\Http\Controllers\StaticController::class, 'terms'])->
 Route::get('/teacher-promotion', [\App\Http\Controllers\StaticController::class, 'teacher_promotion'])->name('teacher.promotion');
 
 Route::post('/teacher-promotion-post-send-email', [\App\Http\Controllers\StaticController::class, 'teacher_promotion_send_email'])->name('teacher.promotion.post');
+
+Route::get('/franchise/details', [\App\Http\Controllers\StaticController::class, 'franchise_details'])->name('franchise.details');
+
+Route::get('/franchise/value', [\App\Http\Controllers\StaticController::class, 'franchise_value'])->name('franchise.value');
+
+//Franchisee
+
+Route::get('/franchise/login', function () {
+    return view('franchise.login', ['title' => 'Franchise Login']);
+})->name('franchise.login');
+
+Route::post('/franchise/login/post', function () {
+    return back()->with('err', 'Incorrect login, please try again');
+})->name('franchise.login.post');
+
+Route::get('/franchise/forget/password', function () {
+    return view('franchise.forget-password', ['title' => 'Franchise Forgot Password']);
+})->name('franchise.forgot.password');
+
+Route::post('/franchise/forget/password/post', function () {
+    return back()->with('err', 'If your email is in our system; you will receive a password reset email.');
+})->name('franchise.forgot.password.post');
+
+Route::get('/franchise/signup', function () {
+    return view('franchise.signup', ['title' => 'Franchise Signup']);
+})->name('franchise.signup');
+
+Route::post('/franchise/signup/post', function (Request $request) {
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+        'password_confirmation' => 'min:6',
+        'phone' => 'required',
+        'business_name' => 'required'
+    ]);
+
+    $insert = new \App\Models\FranchiseUsers;
+
+    $insert->name = $request->name;
+    $insert->business = $request->business_name;
+    $insert->email = $request->email;
+    $insert->password = \Illuminate\Support\Facades\Hash::make($request->password);
+    $insert->phone = $request->phone;
+
+    $insert->save();
+
+    return back()->with('msg', 'You have successfully created your Franchise Account.');
+
+
+})->name('franchise.signup.post');

@@ -64,4 +64,14 @@ class StaticController extends Controller
         return back()->with('msg', 'Thank you for contacting us.');
     }
 
+    public function franchise_details()
+    {
+        return view('static.franchise_details', ['title' => 'Franchise Details']);
+    }
+
+    public function franchise_value()
+    {
+        return view('static.franchise_values', ['title' => 'Franchise Values']);
+    }
+
 }

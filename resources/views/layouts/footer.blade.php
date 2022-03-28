@@ -14,6 +14,12 @@
                     <li>
                         <a href="{{ route('static.data.points') }}">Data Points</a>
                     </li>
+                    <li>
+                        <a href="{{ route('franchise.details') }}">Franchise Details</a>
+                    </li>
+                    <li>
+                        <a href="{{ route('franchise.value') }}">Franchise Values</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-2 col-6">
