@@ -48,21 +48,21 @@
                             @endif
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label class="mb-2">Your Password*</label>
-                            <input type="password" placeholder="Password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" {{ old('password') }} required autocomplete="offf">
-                            @if ($errors->has('password'))
-                                <span class="text-danger">{{ $errors->first('password') }}</span>
-                            @endif
-                        </div>
+{{--                        <div class="form-group mb-3">--}}
+{{--                            <label class="mb-2">Your Password*</label>--}}
+{{--                            <input type="password" placeholder="Password" id="password" class="form-control @error('password') is-invalid @enderror" name="password" {{ old('password') }} required autocomplete="offf">--}}
+{{--                            @if ($errors->has('password'))--}}
+{{--                                <span class="text-danger">{{ $errors->first('password') }}</span>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
 
-                        <div class="form-group mb-3">
-                            <label class="mb-2">Confirm Password*</label>
-                            <input type="password" placeholder="Confirm Password" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="offf">
-                            @if ($errors->has('password_confirmation'))
-                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>
-                            @endif
-                        </div>
+{{--                        <div class="form-group mb-3">--}}
+{{--                            <label class="mb-2">Confirm Password*</label>--}}
+{{--                            <input type="password" placeholder="Confirm Password" id="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror" name="password_confirmation" value="{{ old('password_confirmation') }}" required autocomplete="offf">--}}
+{{--                            @if ($errors->has('password_confirmation'))--}}
+{{--                                <span class="text-danger">{{ $errors->first('password_confirmation') }}</span>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
 
 
                         <div class="form-check mb-3">

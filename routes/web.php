@@ -250,23 +250,31 @@ Route::post('/franchise/signup/post', function (Request $request) {
     $request->validate([
         'name' => 'required',
         'email' => 'required|email|unique:users',
-        'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
-        'password_confirmation' => 'min:6',
+//        'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
+//        'password_confirmation' => 'min:6',
         'phone' => 'required',
         'business_name' => 'required'
     ]);
 
-    $insert = new \App\Models\FranchiseUsers;
+    try {
+        $insert = new \App\Models\FranchiseUsers;
 
-    $insert->name = $request->name;
-    $insert->business = $request->business_name;
-    $insert->email = $request->email;
-    $insert->password = \Illuminate\Support\Facades\Hash::make($request->password);
-    $insert->phone = $request->phone;
+        $insert->name = $request->name;
+        $insert->business = $request->business_name;
+        $insert->email = $request->email;
+        //$insert->password = \Illuminate\Support\Facades\Hash::make($request->password);
+        $insert->password = \Illuminate\Support\Facades\Hash::make(uniqid() . time() . $request->email);
+        $insert->phone = $request->phone;
 
-    $insert->save();
+        $insert->save();
 
-    return back()->with('msg', 'You have successfully created your Franchise Account.');
+        return back()->with('msg', 'You have successfully created your Franchise Account.');
+    } catch (\Exception $ex) {
+        return abort('500');
+        //return back()->with('err', 'Your email id is already exist into our system. Please try again.');
+    }
+
+
 
 
 })->name('franchise.signup.post');
