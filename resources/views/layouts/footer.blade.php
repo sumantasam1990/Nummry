@@ -63,6 +63,8 @@
 
 <script src="{{ asset('js/bootstrap.js') }}"></script>
 
+{!! RecaptchaV3::initJs() !!}
+
 
 
 <script>

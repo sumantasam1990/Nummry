@@ -14,7 +14,7 @@
                     <h2 class="fs-4 text-left mb-4">Sign Up For Nummry</h2>
                     <h6 style="line-height: 1.5;" class="text-left fs-6 fw-normal mb-4 text-black-50">We do not require payment <strong>upfront</strong> but if after your first week, you wish to continue using <strong>Nummry</strong> and would like to retain your data from the first week, you will be required to pay you invoice that we email you at the end of your first week. If you wish not to continue using <strong>Nummry</strong> after your first week, simply do not pay the invoice that we email you.</h6>
 
-                    <form action="{{ route('register.custom') }}" method="POST">
+                    <form action="{{ url('/custom-registration') }}" method="POST" id="demo-form">
                         @csrf
 
                         <input style="display: none;" class="form-control" type="text" name="teacher_txt" value="{{ isset($email) ? 'teacher' : 'sp' }}">
@@ -99,6 +99,19 @@
                             @endif
                         </div>
 
+{{--                        <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }} mb-3">--}}
+{{--                            <div class="col-md-6">--}}
+{{--                                {!! RecaptchaV3::field('custom-registration') !!}--}}
+{{--                                @if ($errors->has('g-recaptcha-response'))--}}
+{{--                                    <span class="help-block">--}}
+{{--                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                @endif--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+
+
+
 
 
                         <div class="form-check mb-3">
@@ -110,7 +123,9 @@
 
 
                         <div class="d-grid mx-auto">
-                            <button type="submit" class="btn btn-dark big-btn">Sign up</button>
+                            <button type="submit" class="btn btn-dark big-btn g-recaptcha" data-sitekey="{{ env('recaptchav3_sitekey') }}"
+                                    data-callback='onSubmit'
+                                    data-action='submit'>Sign up</button>
                             <a class="btn text-dark text-decoration-underline fw-bold mt-3" href="{{ route('login') }}">Already Have An Account? <u>Login</u></a>
                         </div>
                     </form>
@@ -125,3 +140,9 @@
 
 
 @include('layouts.footer')
+
+<script>
+    function onSubmit(token) {
+        document.getElementById("demo-form").submit();
+    }
+</script>

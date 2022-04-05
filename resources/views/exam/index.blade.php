@@ -128,7 +128,7 @@
 
                         @else
                                 @if($question->q_image > 0)
-                                    <a target="_blank" href="{{ asset('uploads/' . $question->question_main) }}"> <img style="width: 300px; height: 300px; object-fit: cover;" src="{{ asset('uploads/' . $question->question_main) }}"></a>
+                                    <a target="_blank" href="{{ asset('uploads/' . $question->question_main) }}"> <img class="img-fluid" style="" src="{{ asset('uploads/' . $question->question_main) }}"></a>
                                 @else
                                     {{ $question->question_main }}
                                 @endif

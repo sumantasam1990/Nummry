@@ -79,7 +79,8 @@ class LoginController extends Controller
             'email' => 'required|email|unique:users',
             'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
             'password_confirmation' => 'min:6',
-            'phone' => 'required'
+            'phone' => 'required',
+            //'g-recaptcha-response' => 'required|recaptchav3:custom-registration,0.5'
 //            'user_type' => 'required|in:Buyer,Agent'
 
         ]);
