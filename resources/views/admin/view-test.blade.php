@@ -37,11 +37,12 @@
                         <td>{{ $lesson->name }}</td>
                         <td>{{ $lesson->email }}</td>
                         <td>
-                            @if($lesson->complete_status === 5)
-                                <p class="text-success fw-bold text-center">Completed</p>
-                            @else
-                                <a href="{{ route('admin.question.view', [$lesson->lid]) }}" class="nav nav-link">View Questions</a>
-                            @endif
+{{--                            @if($lesson->complete_status === 5)--}}
+{{--                                <p class="text-success fw-bold text-center">Completed</p>--}}
+{{--                            @else--}}
+{{--                                <a href="{{ route('admin.question.view', [$lesson->lid]) }}" class="nav nav-link">View Questions</a>--}}
+{{--                            @endif--}}
+                            <a href="{{ route('admin.question.view', [$lesson->lid]) }}" class="nav nav-link">View Questions</a>
                         </td>
                     </tr>
                 @endforeach
