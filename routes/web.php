@@ -220,36 +220,36 @@ Route::get('/teacher-promotion', [\App\Http\Controllers\StaticController::class,
 
 Route::post('/teacher-promotion-post-send-email', [\App\Http\Controllers\StaticController::class, 'teacher_promotion_send_email'])->name('teacher.promotion.post');
 
-Route::get('/franchise/details', [\App\Http\Controllers\StaticController::class, 'franchise_details'])->name('franchise.details');
+Route::get('/partner/details', [\App\Http\Controllers\StaticController::class, 'franchise_details'])->name('franchise.details');
 
-Route::get('/franchise/value', [\App\Http\Controllers\StaticController::class, 'franchise_value'])->name('franchise.value');
+Route::get('/partner/value', [\App\Http\Controllers\StaticController::class, 'franchise_value'])->name('franchise.value');
 
 //Franchisee
 
-Route::get('/franchise/login', function () {
-    return view('franchise.login', ['title' => 'Franchise Login']);
+Route::get('/partner/login', function () {
+    return view('franchise.login', ['title' => 'Partner Login']);
 })->name('franchise.login');
 
-Route::post('/franchise/login/post', function () {
+Route::post('/partner/login/post', function () {
     return back()->with('err', 'Incorrect login, please try again');
 })->name('franchise.login.post');
 
-Route::get('/franchise/forget/password', function () {
-    return view('franchise.forget-password', ['title' => 'Franchise Forgot Password']);
+Route::get('/partner/forget/password', function () {
+    return view('franchise.forget-password', ['title' => 'Partner Forgot Password']);
 })->name('franchise.forgot.password');
 
-Route::post('/franchise/forget/password/post', function () {
+Route::post('/partner/forget/password/post', function () {
     return back()->with('err', 'If your email is in our system; you will receive a password reset email.');
 })->name('franchise.forgot.password.post');
 
-Route::get('/franchise/signup', function () {
-    return view('franchise.signup', ['title' => 'Franchise Signup']);
+Route::get('/partner/signup', function () {
+    return view('franchise.signup', ['title' => 'Partner Signup']);
 })->name('franchise.signup');
 
-Route::post('/franchise/signup/post', function (Request $request) {
+Route::post('/partner/signup/post', function (Request $request) {
     $request->validate([
         'name' => 'required',
-        'email' => 'required|email|unique:users',
+        'email' => 'required|email|unique:franchise_users',
 //        'password' => 'min:6|required_with:password_confirmation|same:password_confirmation',
 //        'password_confirmation' => 'min:6',
         'phone' => 'required',
@@ -268,13 +268,51 @@ Route::post('/franchise/signup/post', function (Request $request) {
 
         $insert->save();
 
-        return back()->with('msg', 'You have successfully created your Franchise Account.');
+        return back()->with('msg', 'You have successfully created your Partner Account.');
     } catch (\Exception $ex) {
         return abort('500');
         //return back()->with('err', 'Your email id is already exist into our system. Please try again.');
     }
 
-
-
-
 })->name('franchise.signup.post');
+
+// Tutor -----
+Route::get('/tutor/login', function () {
+    return view('tutor.login', ['title' => 'Tutor Login']);
+})->name('tutor.login');
+
+Route::post('/tutor/login/post', function () {
+    return back()->with('err', 'Incorrect login, please try again');
+})->name('tutor.login.post');
+
+Route::get('/tutor/signup', function () {
+    return view('tutor.signup', ['title' => 'Tutor Signup']);
+})->name('tutor.signup');
+
+Route::post('/tutor/signup/post', function (Request $request) {
+    $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:tutors',
+        'phone' => 'required',
+    ]);
+
+    try {
+        $insert = new \App\Models\Tutor;
+
+        $insert->name = $request->name;
+        $insert->email = $request->email;
+        $insert->password = \Illuminate\Support\Facades\Hash::make(uniqid() . time() . $request->email);
+        $insert->phone = $request->phone;
+
+        $insert->save();
+
+        return back()->with('msg', 'You have successfully created your Tutor Account.');
+    } catch (\Exception $ex) {
+        return abort('500');
+    }
+
+})->name('tutor.signup.post');
+
+Route::get('/tutor', function () {
+    return view('tutor.home', ['title' => 'Tutor']);
+})->name('tutor.home');

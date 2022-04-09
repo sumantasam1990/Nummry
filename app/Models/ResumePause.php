@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|ResumePause whereResume($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ResumePause whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|ResumePause whereUserId($value)
+ * @property int|null $question_id
+ * @method static \Illuminate\Database\Eloquent\Builder|ResumePause whereQuestionId($value)
  */
 class ResumePause extends Model
 {

@@ -20,6 +20,9 @@
                     <li>
                         <a href="{{ route('franchise.value') }}">Franchise Values</a>
                     </li>
+                    <li>
+                        <a href="{{ route('tutor.home') }}">Tutor</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-md-2 col-6">

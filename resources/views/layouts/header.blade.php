@@ -110,7 +110,8 @@
         <div class="col-md-12" >
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end ffgg">
-                <a href="{{ route('login') }}" class="btn btn-outline-dark mt-4"><i class="fas fa-lock"></i> Parent/Student Login</a>
+                <a href="{{ route('login') }}" class="btn btn-warning mt-4"><i class="fas fa-lock"></i> Parent/Student Login</a>
+                <a href="{{ route('tutor.login') }}" class="btn btn-outline-dark mt-4"><i class="fas fa-lock"></i> Tutor Login</a>
                 <a href="{{ route('franchise.login') }}" class="btn btn-outline-dark mt-4"><i class="fas fa-lock"></i> Franchise Login</a>
                 <a href="{{ route('franchise.details') }}" class="btn btn-dark mt-4"><i class="far fa-building"></i> Franchise Details</a>
                 <a href="{{ route('franchise.value') }}" class="btn btn-dark mt-4"><i class="far fa-building"></i> Franchise Values</a>

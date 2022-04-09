@@ -26,6 +26,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|TestTime whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|TestTime whereUserId($value)
  * @mixin \Eloquent
+ * @property int|null $question_id
+ * @method static \Illuminate\Database\Eloquent\Builder|TestTime whereQuestionId($value)
  */
 class TestTime extends Model
 {
